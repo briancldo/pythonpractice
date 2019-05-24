@@ -7,7 +7,7 @@ while 1:
         continue
 
     matches = re.split(" +", line) #parses input by space into a list
-
+    
     #parsing command
     command = matches.pop(0) #getting command, first word in input
     command_match = re.match("^[a-zA-Z]+$", command) #checking if command is letters only
@@ -17,12 +17,12 @@ while 1:
 
     #parsing arg
     arg = None
+
     if len(matches) > 0:
         arg = matches.pop() # getting arg, we'll deal with arg merged with flag issue later
-    arg_match = re.match("^[a-zA-Z0-9]*$", arg)
-    if not arg_match:
-        print("Error: Argument should consist of alphanumeric characters")
-        continue
+        if not re.match("[a-zA-Z0-9]*$", str(arg)):
+            print("Error: Argument should consist of alphanumeric characters")
+            continue
 
     #parsing flags
     flags = list() #now we're getting the flags
